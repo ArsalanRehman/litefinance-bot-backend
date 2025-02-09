@@ -49,6 +49,22 @@ app.get('/api/tradingHistory/:id', async (req, res) => {
     }
   });
 
+app.get('/api/positions/:id', async (req, res) => {
+    try {
+      const id = req.params.id;
+      // console.log(id);
+      
+    //   const response = await fetch(`https://my.litefinance.vn/traders/trades?id=${id}`);
+      const response = await fetch(`https://my.litefinance.vn/traders/positions?id=${id}`);
+      const html = await response.text();
+      res.send(html);
+    } catch (err) {
+      res.status(500).send('Error fetching trades');
+    }
+  });
+
+
 app.listen(5000, () => {
   console.log('Proxy server running on port 5000');
 });
+
