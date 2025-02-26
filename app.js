@@ -29,6 +29,9 @@ app.get('/api/trades/:id', async (req, res) => {
 
         const instrument = $(cols[0]).find('.title a').text().trim()
         const type = $(cols[1]).find('.label').text().trim()
+        // Only process trades with type "Buy" or "Sell"
+        if (type !== 'Buy' && type !== 'Sell') return
+
         const volume = $(cols[2]).find('.data_value').text().trim()
         const openTime = $(cols[3]).find('.data_value').text().trim()
         const profit = $(cols[8]).find('.data_value').text().trim()
@@ -43,6 +46,7 @@ app.get('/api/trades/:id', async (req, res) => {
     res.status(500).send('Error fetching trades')
   }
 })
+
 
 // Endpoint to fetch and parse trading history
 app.get('/api/tradingHistory/:id', async (req, res) => {
