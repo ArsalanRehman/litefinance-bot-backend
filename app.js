@@ -35,8 +35,19 @@ app.get('/api/trades/:id', async (req, res) => {
         const volume = $(cols[2]).find('.data_value').text().trim()
         const openTime = $(cols[3]).find('.data_value').text().trim()
         const profit = $(cols[8]).find('.data_value').text().trim()
+        const openPrice = $(cols[4]).find('.data_value').text().trim()
+        const currentPrice = $(cols[5]).find('.data_value').text().trim()
+        // console.log(currentPrice)
 
-        trades.push({ instrument, type, volume, openTime, profit })
+        trades.push({
+          instrument,
+          type,
+          volume,
+          openTime,
+          profit,
+          openPrice,
+          currentPrice,
+        })
       }
     )
 
@@ -46,7 +57,6 @@ app.get('/api/trades/:id', async (req, res) => {
     res.status(500).send('Error fetching trades')
   }
 })
-
 
 // Endpoint to fetch and parse trading history
 app.get('/api/tradingHistory/:id', async (req, res) => {
